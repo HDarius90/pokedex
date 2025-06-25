@@ -2,19 +2,20 @@ import Pokecard from './Pokecard';
 import './Pokedex.css';
 
 const Pokedex = ({ pokemons }) => {
-    console.log(pokemons);
-    
   return (
     <div className="Pokedex">
-    <h1>Pokedex!</h1>
-      {pokemons.map((pokemon) => (
-        <Pokecard
-          id={pokemon.id}
-          name={pokemon.name}
-          type={pokemon.type}
-          exp={pokemon.base_experience}
-        />
-      ))}
+      <h1>Pokedex!</h1>
+      <div className="Pokedex-cards">
+        {pokemons.map((pokemon) => (
+          <Pokecard
+            key={pokemon.id}
+            id={pokemon.id}
+            name={pokemon.name}
+            type={pokemon.type}
+            exp={pokemon.base_experience}
+          />
+        ))}
+      </div>
     </div>
   );
 };
