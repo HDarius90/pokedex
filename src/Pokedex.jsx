@@ -4,9 +4,12 @@ import './Pokedex.css';
 const Pokedex = ({ pokemons, exp, isWinner }) => {
   return (
     <div className="Pokedex">
-      <h1>Pokedex!</h1>
-      <p>Total Experience: {exp}</p>
-      <p>{isWinner ? 'WINNER' : 'LOOSER'}</p>
+      {isWinner ? (
+        <h1 className="Pokedex-winner">Winning Hand</h1>
+      ) : (
+        <h1 className="Pokedex-loser">Losing Hand</h1>
+      )}
+      <h4>Total Experience: {exp}</h4>
       <div className="Pokedex-cards">
         {pokemons.map((pokemon) => (
           <Pokecard

@@ -1,6 +1,4 @@
 import './App.css';
-import Pokecard from './Pokecard';
-import Pokedex from './Pokedex';
 import Pokegame from './Pokegame';
 
 const pokemons = [
@@ -17,8 +15,6 @@ const pokemons = [
 function App() {
   return (
     <div className="App">
-      <Pokecard id={4} name={'Charmander'} type={'fire'} exp={62} />
-      <Pokedex pokemons={pokemons.slice(0, 8)} />
       <Pokegame pokemons={pokemons} />
     </div>
   );
