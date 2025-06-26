@@ -9,7 +9,9 @@ const Pokecard = ({ id, name, type, exp }) => {
   const imgSrc = `${POKE_API}${padToThree(id)}.png`;
   return (
     <div className="Pokecard">
-      <h1 className="Pokecard-title">{name}</h1>
+      <h1 className="Pokecard-title">
+        {name.slice(0, 1).toUpperCase() + name.slice(1)}
+      </h1>
       <div className="Pokecard-image">
         <img src={imgSrc} alt={name} />
       </div>

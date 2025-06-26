@@ -1,18 +1,45 @@
 import './App.css';
 import Pokegame from './Pokegame';
+import React, { useEffect, useState } from 'react';
 
-const pokemons = [
-  { id: 4, name: 'Charmander', type: 'fire', base_experience: 62 },
-  { id: 7, name: 'Squirtle', type: 'water', base_experience: 63 },
-  { id: 11, name: 'Metapod', type: 'bug', base_experience: 72 },
-  { id: 12, name: 'Butterfree', type: 'flying', base_experience: 178 },
-  { id: 25, name: 'Pikachu', type: 'electric', base_experience: 112 },
-  { id: 39, name: 'Jigglypuff', type: 'normal', base_experience: 95 },
-  { id: 94, name: 'Gengar', type: 'poison', base_experience: 225 },
-  { id: 133, name: 'Eevee', type: 'normal', base_experience: 65 },
-];
+const getRandomUniqueIds = (count, min, max) => {
+  const ids = [];
+  while (ids.length < count) {
+    const id = Math.floor(Math.random() * (max - min + 1)) + min;
+    ids.push(id);
+  }
+  return ids;
+};
 
 function App() {
+  const [pokemons, setPokemons] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchPokemons = async () => {
+      const randomIds = getRandomUniqueIds(8, 1, 150);
+      
+      try {
+        const responses = await Promise.all(
+          randomIds.map((id) =>
+            fetch(`https://pokeapi.co/api/v2/pokemon/${id}`).then((res) =>
+              res.json()
+            )
+          )
+        );
+        setPokemons(responses);
+      } catch (error) {
+        console.error('Error fetching Pokémon:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchPokemons();
+  }, []);
+
+  if (loading) return <div>Loading...</div>;
+
   return (
     <div className="App">
       <Pokegame pokemons={pokemons} />
